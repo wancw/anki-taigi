@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
+require "rake/testtask"
 require_relative "lib/version"
+
+Rake::TestTask.new(:test) do |t|
+  t.libs << "test"
+  t.test_files = FileList["test/test_*.rb"]
+end
 
 DATA_DIR = "data"
 CSV_DIR = "data/csv"

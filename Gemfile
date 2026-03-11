@@ -7,3 +7,7 @@ gem "rake"
 gem "rexml"
 gem "rubyzip", require: "zip"
 gem "sqlite3"
+
+group :test do
+  gem "minitest"
+end
