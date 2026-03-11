@@ -20,6 +20,9 @@ jobs:
           ruby-version: "4.0"
           bundler-cache: true
 
+      - name: Run tests
+        run: bundle exec rake test
+
       - name: Generate Anki deck
         run: bundle exec rake build
 
