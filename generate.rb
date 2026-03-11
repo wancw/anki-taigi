@@ -5,12 +5,14 @@ require_relative "lib/moe_fetcher"
 require_relative "lib/ods_parser"
 require_relative "lib/taigi_dict"
 require_relative "lib/anki_exporter"
+require_relative "lib/apkg_exporter"
 require_relative "lib/audio_extractor"
 
 DATA_DIR = "data"
 CSV_DIR = "data/csv"
 AUDIO_DIR = "output/audio"
-OUTPUT_FILE = "output/taigi_deck.txt"
+OUTPUT_TXT = "output/taigi_deck.txt"
+OUTPUT_APKG = "output/taigi.apkg"
 
 # Step 1: Download
 puts "=== Step 1: Fetch MOE open data ==="
@@ -30,23 +32,24 @@ puts "\n=== Step 3: Export CSV cache ==="
 dict.export_csv(CSV_DIR)
 puts "  Saved to #{CSV_DIR}/"
 
-# Step 4: Build and export Anki deck
-puts "\n=== Step 4: Generate Anki deck ==="
-cards = dict.build_cards
-puts "  Cards: #{cards.size}"
-
-total_lines = cards.sum { |c| c.definitions.size }
-AnkiExporter.export(cards, output_path: OUTPUT_FILE)
-puts "  Exported #{total_lines} notes to #{OUTPUT_FILE}"
-
-# Step 5: Extract audio
-puts "\n=== Step 5: Extract audio files ==="
+# Step 4: Extract audio
+puts "\n=== Step 4: Extract audio files ==="
 n1 = AudioExtractor.extract(entries_zip, dest_dir: AUDIO_DIR, prefix: "sutiau-")
 puts "  Entry audio:   #{n1} files"
 n2 = AudioExtractor.extract(examples_zip, dest_dir: AUDIO_DIR, prefix: "leku-")
 puts "  Example audio: #{n2} files"
 
+# Step 5: Build cards and export
+puts "\n=== Step 5: Build Anki deck ==="
+cards = dict.build_cards
+total_notes = cards.sum { |c| c.definitions.size }
+puts "  Cards: #{cards.size} (#{total_notes} notes)"
+
+AnkiExporter.export(cards, output_path: OUTPUT_TXT)
+puts "  Exported TSV:  #{OUTPUT_TXT}"
+
+ApkgExporter.export(cards, output_path: OUTPUT_APKG, audio_dir: AUDIO_DIR)
+puts "  Exported APKG: #{OUTPUT_APKG}"
+
 puts "\n=== Done! ==="
-puts "1. Copy #{AUDIO_DIR}/*.mp3 to your Anki media folder"
-puts "   (e.g., ~/.local/share/Anki2/<profile>/collection.media/)"
-puts "2. Import #{OUTPUT_FILE} into Anki"
+puts "Import #{OUTPUT_APKG} into Anki (File → Import)"

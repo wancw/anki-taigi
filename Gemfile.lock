@@ -4,20 +4,22 @@ GEM
     csv (3.3.5)
     rexml (3.4.4)
     rubyzip (3.2.2)
+    sqlite3 (2.9.1-x86_64-linux-gnu)
 
 PLATFORMS
-  ruby
   x86_64-linux
 
 DEPENDENCIES
   csv
   rexml
   rubyzip
+  sqlite3
 
 CHECKSUMS
   csv (3.3.5) sha256=6e5134ac3383ef728b7f02725d9872934f523cb40b961479f69cf3afa6c8e73f
   rexml (3.4.4) sha256=19e0a2c3425dfbf2d4fc1189747bdb2f849b6c5e74180401b15734bc97b5d142
   rubyzip (3.2.2) sha256=c0ed99385f0625415c8f05bcae33fe649ed2952894a95ff8b08f26ca57ea5b3c
+  sqlite3 (2.9.1-x86_64-linux-gnu) sha256=1cbb644204ed143e5c96f6d59b5c571ba6f18b18a9dc5aa11c101187ff227afd
 
 BUNDLED WITH
   4.0.3

@@ -3,5 +3,6 @@
 source "https://rubygems.org"
 
 gem "csv"
-gem "rubyzip", require: "zip"
 gem "rexml"
+gem "rubyzip", require: "zip"
+gem "sqlite3"
