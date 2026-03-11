@@ -50,8 +50,22 @@ module MoeFetcher
       http.request(request) do |response|
         case response
         when Net::HTTPSuccess
+          total = response["content-length"]&.to_i
+          downloaded = 0
+          last_report = 0
           File.open(dest_path, "wb") do |f|
-            response.read_body { |chunk| f.write(chunk) }
+            response.read_body do |chunk|
+              f.write(chunk)
+              downloaded += chunk.size
+              if total && total > 0
+                pct = (downloaded * 100) / total
+                if pct >= last_report + 10
+                  last_report = pct / 10 * 10
+                  $stdout.print "  #{format_size(downloaded)} / #{format_size(total)} (#{pct}%)\n"
+                  $stdout.flush
+                end
+              end
+            end
           end
         when Net::HTTPRedirection
           download(response["location"], dest_path, redirect_limit: redirect_limit - 1)
