@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-VERSION = "0.0.1"
+# Shortcut to run the full pipeline: equivalent to `rake build`
 
+require_relative "lib/version"
 require_relative "lib/moe_fetcher"
 require_relative "lib/ods_parser"
 require_relative "lib/taigi_dict"
