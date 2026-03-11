@@ -9,9 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -23,8 +22,29 @@ jobs:
       - name: Run tests
         run: bundle exec rake test
 
-      - name: Generate Anki deck
-        run: bundle exec rake build
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "4.0"
+          bundler-cache: true
+
+      - name: Fetch MOE data
+        run: bundle exec rake fetch
+
+      - name: Parse dictionary
+        run: bundle exec rake parse
+
+      - name: Extract audio
+        run: bundle exec rake audio
+
+      - name: Export Anki deck
+        run: bundle exec rake export
 
       - name: Rename output with version
         run: |
