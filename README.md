@@ -1,3 +1,8 @@
+<p align="center">
+  <span>English</span> |
+  <a href="readmes/README.nan-hant-tw.md">台語（漢字）</a>
+</p>
+
 # anki-taigi
 
 Generate [Anki](https://apps.ankiweb.net/) flashcard decks for **Taiwanese Taigi (台灣台語)** from the [教育部臺灣台語常用詞辭典](https://sutian.moe.edu.tw/) open data.

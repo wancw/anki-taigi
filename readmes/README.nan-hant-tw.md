@@ -1,3 +1,8 @@
+<p align="center">
+  <a href="../README.md">English</a> |
+  <span>台語（漢字）</span>
+</p>
+
 # anki-taigi
 
 對[教育部臺灣台語常用詞辭典](https://sutian.moe.edu.tw/)開放資料產生 [Anki](https://apps.ankiweb.net/) 用--ê **台灣台語（Taiwanese Taigi）** 字卡組
