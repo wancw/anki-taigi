@@ -52,8 +52,7 @@ The pipeline will:
 Output files are written to `output/`:
 產生 ê 檔案會囥佇咧 `output/`：
 
-| File | Description |
-| 檔案 | 說明 |
+| File 檔案 | Description 說明 |
 |------|-------------|
 | `output/taigi.apkg` | Anki package with embedded audio (~694 MB) |
 | | 包含音檔--ê Anki 字卡組檔案 （大約 694 MB） |
